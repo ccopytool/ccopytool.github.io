@@ -8,7 +8,8 @@
       name="description"
       content="ccopy는 Claude Code 대화를 계정 사이로 복사하는 데스크톱 유틸리티입니다. 복사한 뒤 Claude Code를 다시 켜면 그 계정에서 이어서 작업할 수 있습니다."
     />
-    <meta name="theme-color" content="#fcfcfa" />
+    <meta name="theme-color" content="#faf9f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#1c1c1c" media="(prefers-color-scheme: dark)" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="ccopy — Claude Code 대화를 계정 사이로" />
     <meta property="og:description" content="Claude Code 대화를 계정 사이로 복사하는 데스크톱 유틸리티." />
@@ -36,10 +37,12 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
     />
-    <!-- The app's own copy mark on the app's own plate, inlined so the page stays one file. -->
+    <!-- The app's own copy mark on the app's own plate, inlined so the page stays one file.
+         Same path `src/renderer/src/icon.ts` hands the window; the plate now wears the
+         Claude Code colours the rest of the page does. -->
     <link
       rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%2314161a'/%3E%3Cg transform='translate(3.4 3.4) scale(.72)' fill='%236ea8fe'%3E%3Cpath d='M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z'/%3E%3C/g%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='5' fill='%231c1c1c'/%3E%3Cg transform='translate(3.4 3.4) scale(.72)' fill='%23d97757'%3E%3Cpath d='M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z'/%3E%3C/g%3E%3C/svg%3E"
     />
 
     <style>
@@ -57,24 +60,33 @@
 
         Light by default because the page is a document rather than a product
         shot. The dark scheme is the same variables under `prefers-color-scheme`,
-        so nothing below that block has to know which one it is in. The accent is
-        the app's own blue rather than hungry's violet: it is the colour of the
-        thing being described.
+        so nothing below that block has to know which one it is in.
+
+        The palette is Claude Code's, the same one the app window wears — this
+        page describes a tool for Claude Code conversations, so it is the colour
+        of the thing being described. The neutrals are warm greys rather than the
+        blue-greys that were here before, and the accent is the clay `#d97757`.
+
+        Dark mode takes that clay unchanged: on `#1c1c1c` it measures 5.46:1,
+        which clears AA for body text. Light mode cannot — the same clay on the
+        `#faf9f5` paper is 2.96:1, well under the 4.5:1 a link needs — so light
+        mode darkens it to `#b04d28` (5.06:1). Same hue, enough contrast. Do not
+        "fix" the two back to one value; they are two because the backgrounds are.
       */
 
       :root {
-        --paper: #fcfcfa;
+        --paper: #faf9f5;
         --card: #ffffff;
-        --ink: #111114;
-        --muted: #52525a;
-        --faint: #8a8a92;
-        --line: #e7e6e0;
-        --line-soft: #f0efea;
-        --accent: #1f5ac4;
-        --accent-hover: #1848a3;
-        --accent-soft: #e9f0ff;
+        --ink: #1a1a18;
+        --muted: #6b6b63;
+        --faint: #8d8d87;
+        --line: #e5e3da;
+        --line-soft: #f0eee6;
+        --accent: #b04d28;
+        --accent-hover: #963d1f;
+        --accent-soft: #f6ece6;
         --on-accent: #ffffff;
-        --shadow: 0 1px 2px rgba(17, 17, 20, 0.05);
+        --shadow: 0 1px 2px rgba(26, 26, 24, 0.05);
 
         --sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont,
           system-ui, "Apple SD Gothic Neo", "Malgun Gothic", "Helvetica Neue", Arial, sans-serif;
@@ -86,17 +98,17 @@
 
       @media (prefers-color-scheme: dark) {
         :root {
-          --paper: #101011;
-          --card: #17171a;
-          --ink: #f0f0ee;
-          --muted: #a4a4ac;
-          --faint: #74747c;
-          --line: #26262a;
-          --line-soft: #1d1d20;
-          --accent: #6ea8fe;
-          --accent-hover: #8dbcff;
-          --accent-soft: rgba(110, 168, 254, 0.13);
-          --on-accent: #0d1520;
+          --paper: #1c1c1c;
+          --card: #262626;
+          --ink: #ededeb;
+          --muted: #a5a49c;
+          --faint: #8d8d87;
+          --line: #2e2e2e;
+          --line-soft: #232323;
+          --accent: #d97757;
+          --accent-hover: #e79070;
+          --accent-soft: rgba(217, 119, 87, 0.16);
+          --on-accent: #1f0f08;
           --shadow: none;
           color-scheme: dark;
         }
@@ -352,15 +364,19 @@
       */
 
       .shot {
-        --s-bg: #14161a;
-        --s-panel: #1a1d23;
-        --s-panel-alt: #20242b;
-        --s-border: #2c313a;
-        --s-text: #e6e8ec;
-        --s-muted: #98a0ad;
-        --s-accent: #6ea8fe;
-        --s-accent-soft: #1d2635;
-        --s-note: #b79ae0;
+        /* These mirror the app's own tokens (`renderer/src/styles.css`). It is a
+           picture of that window, so when the window's palette moves this block
+           moves with it — otherwise the page shows a product that no longer
+           exists. Currently: Claude Code's chrome. */
+        --s-bg: #1c1c1c;
+        --s-panel: #171717;
+        --s-panel-alt: #262626;
+        --s-border: #2e2e2e;
+        --s-text: #ededeb;
+        --s-muted: #8d8d87;
+        --s-accent: #d97757;
+        --s-accent-soft: rgba(217, 119, 87, 0.16);
+        --s-note: #a5a49c;
 
         margin-top: clamp(38px, 6vw, 60px);
         border-radius: 12px;
@@ -374,7 +390,7 @@
         overflow: hidden;
         box-shadow:
           0 0 0 1px rgba(0, 0, 0, 0.5),
-          0 26px 60px -18px rgba(17, 17, 20, 0.5);
+          0 26px 60px -18px rgba(0, 0, 0, 0.5);
         user-select: none;
       }
 
@@ -419,7 +435,7 @@
         width: 9px;
         height: 9px;
         border-radius: 50%;
-        background: #333842;
+        background: var(--s-border);
       }
 
       .shot-brand {
@@ -581,7 +597,7 @@
         height: 14px;
         border-radius: 4px;
         background: var(--s-accent);
-        color: #0d1520;
+        color: #1f0f08;
         font-size: 10px;
         font-weight: 700;
       }
@@ -893,6 +909,85 @@
         font-weight: 600;
       }
 
+      /*
+        The other tool in the family. hungry's site carries the mirror of this
+        block pointing back here, and the two are drawn the same way on purpose.
+
+        A card rather than a line in the colophon: the link leaves the site, and
+        footnote-sized text under the version number would not read as somewhere
+        to go. It stays on `--card` and borrows the accent only on hover, so the
+        page's own call to action keeps that colour to itself.
+      */
+      .family {
+        margin-bottom: 26px;
+      }
+
+      .family-label {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--faint);
+        font-size: 12.5px;
+      }
+
+      /* 카드 하나뿐이라 격자가 없습니다. 폭은 `.sib`이 스스로 정합니다 —
+         한 칸을 1fr로 늘리면 카드가 푸터 폭만큼 벌어져 빈 띠가 됩니다. */
+
+      .sib {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        max-width: 430px;
+        padding: 13px 15px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--card);
+        box-shadow: var(--shadow);
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .sib:hover {
+        border-color: var(--accent);
+      }
+
+      .sib .mark {
+        width: 22px;
+        height: 22px;
+        color: var(--accent);
+        flex-shrink: 0;
+      }
+
+      .sib-text {
+        min-width: 0;
+      }
+
+      .sib-name {
+        display: block;
+        color: var(--ink);
+        font-size: 15px;
+        font-weight: 650;
+        letter-spacing: -0.02em;
+      }
+
+      .sib-what {
+        display: block;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      /* The outward arrow the other outside links on the page carry, pushed to
+         the far edge so the card ends on the same sign every time. */
+      .sib-go {
+        margin-left: auto;
+        color: var(--faint);
+        flex-shrink: 0;
+      }
+
+      .sib:hover .sib-go {
+        color: var(--accent);
+      }
+
       @media (max-width: 620px) {
         .page {
           width: calc(100% - 32px);
@@ -950,6 +1045,13 @@
       <defs>
         <symbol id="i-copy" viewBox="0 0 24 24" fill="currentColor">
           <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z" />
+        </symbol>
+
+        <!-- hungry's mark, for the one link to it in the footer. Its own site
+             draws the same paths, from resources/icon.svg over there. -->
+        <symbol id="i-hungry" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3.911 12H18.09c1.602 0 2.19.37 1.79 1.982c-.706 2.843-2.703 3.549-4.549 5.404c-.448.45.25 1.117.25 1.613c0 .934-.887 1.001-1.595 1.001h-5.97c-.708 0-1.596-.067-1.595-1c0-.486.677-1.184.25-1.614c-1.846-1.855-3.843-2.561-4.549-5.404c-.4-1.611.188-1.982 1.79-1.982Z" />
+          <path d="M18.5 12c0-1.791-1.9-3.012-3.5-2.308m-5-2.727a2.5 2.5 0 0 0-1.461-.948C6.626 5.594 4.9 7.658 5.715 9.5A2.51 2.51 0 0 0 3.5 12m12.792-2.517c.781-1.8-.874-3.899-2.83-3.466c-.477-2.69-4.447-2.69-4.923 0M17 9l5-6m-6 3l2-4" />
         </symbol>
       </defs>
     </svg>
@@ -1096,7 +1198,7 @@
               <span>설치</span>
               <button class="copy" type="button" data-copy aria-label="설치 명령 복사">복사</button>
             </p>
-            <pre data-copy-text="npm install -g --allow-remote=all https://ccopytool.github.io/ccopy-0.2.0.tgz"><span class="p">npm</span> install -g --allow-remote=all https://ccopytool.github.io/ccopy-0.2.0.tgz</pre>
+            <pre data-copy-text="npm install -g --allow-remote=all https://ccopytool.github.io/ccopy-0.3.0.tgz"><span class="p">npm</span> install -g --allow-remote=all https://ccopytool.github.io/ccopy-0.3.0.tgz</pre>
           </div>
 
           <p class="orelse">혹은</p>
@@ -1106,9 +1208,9 @@
               <span>내려받아서 설치</span>
               <button class="copy" type="button" data-copy aria-label="내려받아 설치하는 명령 복사">복사</button>
             </p>
-            <pre data-copy-text="curl -LO https://ccopytool.github.io/ccopy-0.2.0.tgz
-npm install -g ./ccopy-0.2.0.tgz"><span class="p">curl</span> -LO https://ccopytool.github.io/ccopy-0.2.0.tgz
-<span class="p">npm</span> install -g ./ccopy-0.2.0.tgz</pre>
+            <pre data-copy-text="curl -LO https://ccopytool.github.io/ccopy-0.3.0.tgz
+npm install -g ./ccopy-0.3.0.tgz"><span class="p">curl</span> -LO https://ccopytool.github.io/ccopy-0.3.0.tgz
+<span class="p">npm</span> install -g ./ccopy-0.3.0.tgz</pre>
           </div>
 
           <p class="sub">실행</p>
@@ -1127,7 +1229,23 @@ npm install -g ./ccopy-0.2.0.tgz"><span class="p">curl</span> -LO https://ccopyt
 
     <footer data-doc="ko" lang="ko">
       <div class="page">
-        <p><b>ccopy</b> 0.2.0 · 제작 · 대식마인드 (DeasikMind)</p>
+        <!-- The other tool in the family. hungry's site carries the mirror of
+             this block pointing back here. -->
+        <div class="family">
+          <span class="family-label">다른 도구</span>
+          <a class="sib" href="https://hungryide.github.io/" rel="noopener">
+            <svg class="mark" aria-hidden="true"><use href="#i-hungry" /></svg>
+            <span class="sib-text">
+              <b class="sib-name">hungry</b>
+              <span class="sib-what">무료 코딩 AI를 위한 코딩 에이전트.</span>
+            </span>
+            <svg class="sib-go" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M4 12L12 4M12 4H6M12 4v6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+
+        <p><b>ccopy</b> 0.3.0 · 제작 · 대식마인드 (DeasikMind)</p>
         <p>대화 파일을 읽고 사본을 하나 더 씁니다. 원본은 열지도, 고치지도, 지우지도 않습니다.</p>
       </div>
     </footer>
@@ -1249,7 +1367,7 @@ npm install -g ./ccopy-0.2.0.tgz"><span class="p">curl</span> -LO https://ccopyt
               <span>Install</span>
               <button class="copy" type="button" data-copy aria-label="Copy the install command">Copy</button>
             </p>
-            <pre data-copy-text="npm install -g --allow-remote=all https://ccopytool.github.io/ccopy-0.2.0.tgz"><span class="p">npm</span> install -g --allow-remote=all https://ccopytool.github.io/ccopy-0.2.0.tgz</pre>
+            <pre data-copy-text="npm install -g --allow-remote=all https://ccopytool.github.io/ccopy-0.3.0.tgz"><span class="p">npm</span> install -g --allow-remote=all https://ccopytool.github.io/ccopy-0.3.0.tgz</pre>
           </div>
 
           <p class="orelse">or</p>
@@ -1259,9 +1377,9 @@ npm install -g ./ccopy-0.2.0.tgz"><span class="p">curl</span> -LO https://ccopyt
               <span>Download, then install</span>
               <button class="copy" type="button" data-copy aria-label="Copy the download and install commands">Copy</button>
             </p>
-            <pre data-copy-text="curl -LO https://ccopytool.github.io/ccopy-0.2.0.tgz
-npm install -g ./ccopy-0.2.0.tgz"><span class="p">curl</span> -LO https://ccopytool.github.io/ccopy-0.2.0.tgz
-<span class="p">npm</span> install -g ./ccopy-0.2.0.tgz</pre>
+            <pre data-copy-text="curl -LO https://ccopytool.github.io/ccopy-0.3.0.tgz
+npm install -g ./ccopy-0.3.0.tgz"><span class="p">curl</span> -LO https://ccopytool.github.io/ccopy-0.3.0.tgz
+<span class="p">npm</span> install -g ./ccopy-0.3.0.tgz</pre>
           </div>
 
           <p class="sub">Run</p>
@@ -1280,7 +1398,23 @@ npm install -g ./ccopy-0.2.0.tgz"><span class="p">curl</span> -LO https://ccopyt
 
     <footer data-doc="en" lang="en">
       <div class="page">
-        <p><b>ccopy</b> 0.2.0 · Made by 대식마인드 (DeasikMind)</p>
+        <!-- The other tool in the family. hungry's site carries the mirror of
+             this block pointing back here. -->
+        <div class="family">
+          <span class="family-label">Other tool</span>
+          <a class="sib" href="https://hungryide.github.io/" rel="noopener">
+            <svg class="mark" aria-hidden="true"><use href="#i-hungry" /></svg>
+            <span class="sib-text">
+              <b class="sib-name">hungry</b>
+              <span class="sib-what">A coding agent for free coding AI.</span>
+            </span>
+            <svg class="sib-go" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M4 12L12 4M12 4H6M12 4v6" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+        </div>
+
+        <p><b>ccopy</b> 0.3.0 · Made by 대식마인드 (DeasikMind)</p>
         <p>It reads conversation files and writes one more. Originals are never opened for writing, changed, or removed.</p>
       </div>
     </footer>
